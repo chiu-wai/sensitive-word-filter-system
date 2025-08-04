@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sensitive.wordfilter.mapper.SensitiveWordMapper">
+
+    <resultMap id="BaseResultMap" type="com.sensitive.wordfilter.entity.SensitiveWord">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="word" property="word" jdbcType="VARCHAR"/>
+        <result column="category" property="category" jdbcType="VARCHAR"/>
+        <result column="level" property="level" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, word, category, level, status, create_time, update_time
+    </sql>
+
+    <!-- 查询所有启用的敏感词 -->
+    <select id="selectAllEnabled" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        WHERE status = 1
+        ORDER BY level DESC, create_time DESC
+    </select>
+
+    <!-- 根据分类查询敏感词 -->
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        WHERE category = #{category}
+        ORDER BY level DESC, create_time DESC
+    </select>
+
+    <!-- 根据级别查询敏感词 -->
+    <select id="selectByLevel" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        WHERE level = #{level}
+        ORDER BY create_time DESC
+    </select>
+
+    <!-- 分页查询敏感词 -->
+    <select id="selectByPage" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        ORDER BY create_time DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 查询敏感词总数 -->
+    <select id="selectCount" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM sensitive_word
+    </select>
+
+    <!-- 根据ID查询敏感词 -->
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        WHERE id = #{id}
+    </select>
+
+    <!-- 根据敏感词查询 -->
+    <select id="selectByWord" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sensitive_word
+        WHERE word = #{word}
+    </select>
+
+    <!-- 插入敏感词 -->
+    <insert id="insert" parameterType="com.sensitive.wordfilter.entity.SensitiveWord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sensitive_word (word, category, level, status, create_time, update_time)
+        VALUES (#{word}, #{category}, #{level}, #{status}, NOW(), NOW())
+    </insert>
+
+    <!-- 更新敏感词 -->
+    <update id="update" parameterType="com.sensitive.wordfilter.entity.SensitiveWord">
+        UPDATE sensitive_word
+        SET word = #{word},
+            category = #{category},
+            level = #{level},
+            status = #{status},
+            update_time = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除敏感词 -->
+    <delete id="deleteById">
+        DELETE FROM sensitive_word
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量插入敏感词 -->
+    <insert id="batchInsert" parameterType="java.util.List">
+        INSERT INTO sensitive_word (word, category, level, status, create_time, update_time)
+        VALUES
+        <foreach collection="words" item="word" separator=",">
+            (#{word.word}, #{word.category}, #{word.level}, #{word.status}, NOW(), NOW())
+        </foreach>
+    </insert>
+
+    <!-- 根据分类删除敏感词 -->
+    <delete id="deleteByCategory">
+        DELETE FROM sensitive_word
+        WHERE category = #{category}
+    </delete>
+
+</mapper> 

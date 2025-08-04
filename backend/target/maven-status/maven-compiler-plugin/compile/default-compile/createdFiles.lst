@@ -1,0 +1,16 @@
+com\sensitive\wordfilter\service\SensitiveWordService.class
+com\sensitive\wordfilter\util\SensitiveWordFilter.class
+com\sensitive\wordfilter\config\MyBatisConfig.class
+com\sensitive\wordfilter\controller\FilterController.class
+com\sensitive\wordfilter\entity\FilterRecord.class
+com\sensitive\wordfilter\mapper\FilterRecordMapper.class
+com\sensitive\wordfilter\SensitiveWordFilterApplication.class
+com\sensitive\wordfilter\service\impl\SensitiveWordServiceImpl.class
+com\sensitive\wordfilter\service\FilterService.class
+com\sensitive\wordfilter\config\RedisConfig.class
+com\sensitive\wordfilter\entity\FilterResult.class
+com\sensitive\wordfilter\controller\SensitiveWordController.class
+com\sensitive\wordfilter\entity\SensitiveWord.class
+com\sensitive\wordfilter\service\impl\FilterServiceImpl.class
+com\sensitive\wordfilter\mapper\SensitiveWordMapper.class
+com\sensitive\wordfilter\entity\Result.class
