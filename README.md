@@ -65,22 +65,6 @@ sensitive-word-filter-system/
 └── README.md
 ```
 
-## 项目展示
-
-![image-20250804190235001](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190235001.png)
-
-![image-20250804190450580](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190450580.png)
-
-![image-20250804190537560](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190537560.png)
-
-![image-20250804190622898](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190622898.png)
-
-![image-20250804190655730](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190655730.png)
-
-![image-20250804190846248](C:\Users\86130\AppData\Roaming\Typora\typora-user-images\image-20250804190846248.png)
-
-
-
 ## 快速开始
 
 ### 环境要求
@@ -176,8 +160,8 @@ npm run build
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/sensitive_word_filter
-    username: root
-    password: 123456
+    username: yourusername
+    password: yourpassword
 ```
 
 ### Redis配置
@@ -185,6 +169,7 @@ spring:
 spring:
   redis:
     host: localhost
+    password:
     port: 6379
     password: 
     database: 0
@@ -196,7 +181,7 @@ sensitive:
   word:
     file-path: classpath:sensitive-words.txt
     cache-expire: 3600
-    replace-char: *
+    replace-char: "*"
 ```
 
 ## 开发说明
